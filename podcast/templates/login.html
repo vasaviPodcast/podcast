@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vasavi Voices | Login</title>
+  </head>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #667f84;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      position: fixed;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      background-color: #002a33;
+      color: white;
+    }
+
+    .land {
+      margin-top: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      color: #fff;
+      padding: 30px;
+    }
+    .land div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 7%;
+      background-color: #002a33;
+      flex-direction: column;
+      padding: 40px;
+      /* width: 100%; */
+      width: 500px;
+      height: auto;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px #002a33;
+    }
+    .land div h1 {
+      margin-bottom: 40px;
+    }
+
+    .button {
+      padding: 8px;
+      padding-left: 25px;
+      padding-right: 25px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button {
+      align-items: center;
+      background-color: #667f84;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.25rem;
+      box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+      box-sizing: border-box;
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      line-height: 1.25;
+      margin: 0;
+      position: relative;
+      text-decoration: none;
+      transition: all 250ms;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: baseline;
+      width: auto;
+    }
+
+    .button:hover,
+    .button:focus {
+      border-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+      color: #fff;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button:active {
+      background-color: #002a33;
+      border-color: #fff;
+      box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+      color: #fff;
+      transform: translateY(0);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      gap: 10px;
+      width: 100%;
+      height: 100%;
+    }
+    form input {
+      width: 100%;
+      height: 40px;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    label {
+      font-size: 20px;
+    }
+  </style>
+
+  <body>
+    <header>
+      <div>
+        <h1>Podcast</h1>
+      </div>
+    </header>
+
+    <section class="land">
+      <div>
+        <center><h1>Admin Login</h1></center>
+        {% if error %}
+        <p style="color: red;">Something went wrong!!! Please try again.</p><br>
+        {% endif %}
+        <form method="post">
+          {% csrf_token %}
+          <label for="uname">Username</label>
+          <input
+            type="text"
+            name="uname"
+            id="uname"
+            placeholder="Enter Username"
+          />
+          <label for="pswd">Password</label>
+          <input
+            type="password"
+            name="pswd"
+            id="pswd"
+            placeholder="Enter Password"
+          />
+          <center><input type="submit" class="button" /></center>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

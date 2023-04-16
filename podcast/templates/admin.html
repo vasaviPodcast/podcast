@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vasavi Voices | Admin</title>
+  </head>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #667f84;
+    }
+    a {
+      text-decoration: none;
+      /* color: #fff; */
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      position: fixed;
+      top: 0px;
+      left: 0;
+      width: 100%;
+      background-color: #002a33;
+      color: white;
+    }
+
+    .land {
+      margin-top: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      text-align: center;
+      color: #fff;
+      padding: 30px;
+    }
+    .land div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .land table {
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: normal;
+      border: none;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    table tr,
+    table td {
+      text-align: justify;
+      padding: 15px;
+      word-break: break-all;
+    }
+    table td {
+      border-right: 1px solid #f8f8f8;
+      font-size: 18px;
+      padding: 15px;
+    }
+    table tr:nth-child(even) {
+      background: #f8f8f89e;
+      color: black;
+    }
+    table tr:nth-child(odd) {
+      background: #fff;
+      color: #002a33;
+    }
+    table th {
+      color: #ffffff;
+      background: #002a33;
+      font-size: 18px;
+      padding: 15px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .land td th {
+        padding: 2px;
+      }
+    }
+    button {
+      padding: 8px;
+      padding-left: 25px;
+      padding-right: 25px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+    .editbtn {
+      background-color: rgb(2, 83, 2);
+      color: #fff;
+    }
+    .deletebtn {
+      background-color: rgb(156, 3, 3);
+      color: #fff;
+    }
+    .addbtn,
+    .addpodcastbtn {
+      background-color: rgb(3, 3, 189);
+      color: #fff;
+    }
+
+    button {
+      align-items: center;
+      background-color: #002a33;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 0.25rem;
+      box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+      box-sizing: border-box;
+      color: rgba(0, 0, 0, 0.85);
+      cursor: pointer;
+      display: inline-flex;
+      /* font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif; */
+      /* font-size: 16px;
+  font-weight: 600; */
+      justify-content: center;
+      line-height: 1.25;
+      margin: 0;
+      /* min-height: 3rem; */
+      /* padding: calc(.875rem - 1px) calc(1.5rem - 1px); */
+      position: relative;
+      text-decoration: none;
+      transition: all 250ms;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      vertical-align: baseline;
+      width: auto;
+    }
+
+    button:hover,
+    button:focus {
+      border-color: rgba(0, 0, 0, 0.15);
+      box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+      color: #fff;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      background-color: #002a33;
+      border-color: rgba(0, 0, 0, 0.15);
+      box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+      color: #fff;
+      transform: translateY(0);
+    }
+  </style>
+
+  <body>
+    <header>
+      <div>
+        <a href="{% url 'dashboard' %}" style="color: #fff"><h1>Podcast</h1></a>
+      </div>
+      <div>
+        <a href="{% url 'logout' %}" style="color: #fff"><h3>Logout</h3></a>
+      </div>
+    </header>
+    <section class="land">
+      <div style="justify-content: space-evenly">
+        <button
+          class="addpodcastbtn"
+          onclick="document.getElementById('form1').style.display = 'block'"
+        >
+          Add Podcast
+        </button>
+        <button
+          class="addbtn"
+          onclick="document.getElementById('form2').style.display = 'block'"
+        >
+          Add News
+        </button>
+        <a href="{% url 'download_sqlite' %}"
+          ><button class="addbtn">Download SQLite3 database &darr;</button></a
+        >
+      </div>
+      <h1>Podcast Data</h1>
+      <div>
+        <table style="max-width: 95vw; table-layout: fixed">
+          <thead>
+            <tr>
+              <th>S.NO</th>
+              <th>Title</th>
+              <th>Contributor</th>
+              <th>Description</th>
+              <th>Audio</th>
+              <th>Cover Image</th>
+              <th>Edit Record</th>
+              <th>Delete Record</th>
+            </tr>
+          </thead>
+          {% for record in records %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{record.title}}</td>
+            <td>{{record.contributor}}</td>
+            <td>{{record.description}}</td>
+            <td>
+              <audio controls style="width: 100%">
+                <source src="{{ record.audio }}" type="audio/mp3" />
+              </audio>
+              <br />
+              {{record.audio}}
+            </td>
+            <td>
+              <img
+                src="{{record.coverImage}}"
+                height="50px"
+                width="50px"
+              /><br />
+              {{record.coverImage}}
+            </td>
+            <td>
+              <a href="{% url 'update' record.id %}"
+                ><button class="editbtn">Edit</button></a
+              >
+            </td>
+            <td>
+              <a href="{% url 'delete' record.id %}"
+                ><button class="deletebtn">Delete</button></a
+              >
+            </td>
+          </tr>
+          {% endfor %} {% if not records %}
+          <tr>
+            <td colspan="8">No records yet.</td>
+          </tr>
+          {% endif %}
+        </table>
+      </div>
+      <form style="display: none" id="form1" method="post">
+        {% csrf_token %}
+        <table>
+          {% for field in form %}
+          <tr>
+            <td>{{field.label}}</td>
+            <td>{{ field }}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="3" align="center">
+              <input type="submit" style="width: 100%" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </section>
+  </body>
+</html>
